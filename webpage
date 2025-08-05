@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Clube de Futebol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f2f7; /* Azul claro para o fundo */
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Cabeçalho */
+        .header {
+            background-color: #004d99; /* Azul escuro */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+        }
+
+        .nav li {
+            margin: 0 20px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav a:hover {
+            background-color: #007bff; /* Azul mais claro no hover */
+            transform: translateY(-2px);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px 0;
+        }
+
+        .section-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-card h2 {
+            color: #004d99;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            display: inline-block; /* Para a linha ficar apenas no texto */
+        }
+
+        /* Notícias */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .news-article {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .news-article:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-article h3 {
+            color: #007bff;
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .news-article p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background-color: #28a745; /* Verde para o botão */
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #218838;
+        }
+
+        /* Tabela de Classificação */
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .standings-table th,
+        .standings-table td {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .standings-table th {
+            background-color: #004d99;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .standings-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .standings-table tbody tr:hover {
+            background-color: #e6f7ff; /* Azul claro no hover da linha */
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav li {
+                margin: 10px 0;
+            }
+
+            .section-card {
+                padding: 20px;
+            }
+
+            .section-card h2 {
+                font-size: 1.8em;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+            }
+
+            .standings-table th,
+            .standings-table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Clube de Futebol FC</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Notícias</a></li>
+                    <li><a href="#">Classificação</a></li>
+                    <li><a href="#">Elenco</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="section-card">
+                <h2>Últimas Notícias</h2>
+                <div class="news-grid">
+                    <article class="news-article">
+                        <h3>Vitória Esmagadora em Casa!</h3>
+                        <p>O Clube de Futebol FC demonstrou sua força em um jogo emocionante no último fim de semana, vencendo por 4 a 0 contra o adversário.</p>
+                        <a href="#" class="read-more">Ler Mais</a>
+                    </article>
+                    <article class="news-article">
+                        <h3>Novo Patrocínio Anunciado</h3>
+                        <p>Um acordo de patrocínio de três anos foi assinado com a "Esporte Total", prometendo impulsionar o clube financeiramente.</p>
+                        <a href="#" class="read-more">Ler Mais</a>
+                    </article>
+                    <article class="news-article">
+                        <h3>Lesão Preocupa o Meio-Campo</h3>
+                        <p>O jogador estrela, Pedro Silva, sofreu uma lesão no treino e sua participação nos próximos jogos é incerta.</p>
+                        <a href="#" class="read-more">Ler Mais</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h2>Tabela de Classificação</h2>
+                <table class="standings-table">
+                    <thead>
+                        <tr>
+                            <th>Pos.</th>
+                            <th>Time</th>
+                            <th>Pts</th>
+                            <th>J</th>
+                            <th>V</th>
+                            <th>E</th>
+                            <th>D</th>
+                            <th>GP</th>
+                            <th>GC</th>
+                            <th>SG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Clube de Futebol FC</td>
+                            <td>35</td>
+                            <td>16</td>
+                            <td>11</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>30</td>
+                            <td>10</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Academia Esportiva</td>
+                            <td>32</td>
+                            <td>16</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>28</td>
+                            <td>12</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>União FC</td>
+                            <td>30</td>
+                            <td>16</td>
+                            <td>9</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>25</td>
+                            <td>15</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Atlético da Cidade</td>
+                            <td>28</td>
+                            <td>16</td>
+                            <td>8</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>22</td>
+                            <td>18</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Vila Nova</td>
+                            <td>25</td>
+                            <td>16</td>
+                            <td>7</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>20</td>
+                            <td>19</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Clube de Futebol FC. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
